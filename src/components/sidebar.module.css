@@ -55,3 +55,9 @@
    background-color: var(--green-500);
    transition: 0.1s;
 }
+
+@media (max-width: 768px) {
+    .sidebar footer a {
+        justify-content: center;
+    }
+}

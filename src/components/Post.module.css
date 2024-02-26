@@ -34,6 +34,14 @@
     justify-content: space-between;
 }
 
+@media (max-width: 375px) {
+    .post > header {
+        gap: 0.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
 .post > header time {
     font-size: 0.875rem;
     color: var(--gray-400);

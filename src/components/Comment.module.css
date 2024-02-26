@@ -11,6 +11,12 @@
     object-fit: cover;
 }
 
+@media (max-width: 375px) {
+    .comment > img {
+        display: none;
+    }
+}
+
 .commentBox {
     flex: 1;
 }
