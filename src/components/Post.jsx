@@ -1,56 +1,86 @@
+import { useState } from "react";
 
-import { Comment } from './Comment';
+import { format, formatDistanceToNow } from "date-fns";
+import ptBr from "date-fns/locale/pt-BR";
 
-import styles from './Post.module.css'
-import avatar from '../assets/avatar.jpg'
-import { Avatar } from './Avatar';
+import { Comment } from "./Comment";
+import { Avatar } from "./Avatar";
 
-export function Post() {
-    return (
-        <>
-            <article className={styles.post}>
-                <header>
-                    <div className={styles.author}>
-                        <Avatar src={avatar} hasBorder={false} />
+import styles from "./Post.module.css";
 
-                        <div className={styles.authorInfo}>
-                            <strong>Flávio Mendonça</strong>
-                            <span>Web Developer</span>
-                        </div>
-                    </div>
+export function Post({ author, publishedAt, content }) {
+  const [comments, setComments] = useState([1, 2]);
 
-                    <time title='25 de maio às 16:36' dateTime='2024-02-25 16:36:30'>Publicado há 1h</time>
-                </header>
+  const publisehdDateFormatted = format(
+    publishedAt,
+    "d 'de' LLLL 'às' HH:mm'h'",
+    {
+      locale: ptBr,
+    }
+  );
 
-                <div className={styles.content}>
-                    <p>🚀💡 Criar novos projetos é a essência da nossa jornada! 💡🚀</p>
-                    <p>Estou tão animado para compartilhar com vocês que estou mergulhando em um novo projeto de estudo. 💻✨ É incrível como cada novo desafio traz consigo oportunidades de aprendizado e crescimento.</p>
-                    <p>
-                        ➡️{' '}<a href='#'>https://github.com/flavioxe</a>
-                    </p>
-                    <p>Quem mais aqui adora começar algo novo? 🙋‍♂️🙋‍♀️ Compartilhe nos comentários o que te motiva a iniciar um novo projeto! 💬</p>
-                    <p> 
-                        <a href='#'>#test</a>{' '}
-                        <a href='#'>#web</a>{' '}
-                        <a href='#'>#project</a>
-                    </p>
-                </div>
+  const publisehdDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBr,
+    addSuffix: true,
+  });
 
-                <form className={styles.commentForm}>
-                    <strong> Deixe seu comentário </strong>
-                    <textarea placeholder='Deixe um comentário'></textarea>
+  function handleCreateNewComment() {
+    event.preventDefault();
+    setComments([...comments, comments.length + 1]);
+  }
 
-                    <footer>
-                        <button type='submit'>Publicar</button>
-                    </footer>
-                </form>
+  return (
+    <>
+      <article className={styles.post}>
+        <header>
+          <div className={styles.author}>
+            <Avatar src={author.avatarURL} hasBorder={false} />
 
-                <div className={styles.commentList}>
-                  <Comment />
-                  <Comment />
-                  <Comment />
-                </div>
-            </article>
-        </>
-    );
+            <div className={styles.authorInfo}>
+              <strong>{author.name}</strong>
+              <span>{author.role}</span>
+            </div>
+          </div>
+
+          <time
+            title={publisehdDateFormatted}
+            dateTime={publishedAt.toISOString()}
+          >
+            {publisehdDateRelativeToNow}
+          </time>
+        </header>
+
+        <div className={styles.content}>
+          {content.map((line) => {
+            if (line.type === "paragraph") {
+              // eslint-disable-next-line react/jsx-key
+              return <p>{line.content}</p>;
+            } else if (line.type === "link") {
+              return (
+                // eslint-disable-next-line react/jsx-key
+                <p>
+                  <a href="#">{line.content}</a>
+                </p>
+              );
+            }
+          })}
+        </div>
+
+        <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
+          <strong> Deixe seu comentário </strong>
+          <textarea placeholder="Deixe um comentário"></textarea>
+
+          <footer>
+            <button type="submit">Publicar</button>
+          </footer>
+        </form>
+
+        <div className={styles.commentList}>
+          {comments.map((comment) => {
+            return <Comment />;
+          })}
+        </div>
+      </article>
+    </>
+  );
 }
