@@ -95,13 +95,8 @@
 }
 
 .commentForm footer {
-    visibility: hidden;
-    max-height: 0;
-}
-
-.commentForm:focus-within footer { 
-    visibility: visible;
-    max-height: none;
+   display: flex;
+   justify-content: flex-end;
 }
 
 .commentForm button[type="submit"] {

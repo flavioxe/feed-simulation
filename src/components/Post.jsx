@@ -32,7 +32,12 @@ export function Post({ author, publishedAt, content }) {
   }
 
   function handleNewCommentChange() {
+    event.target.setCustomValidity("");
     setNewCommentText(event.target.value);
+  }
+
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity("Esse campo é obrigatório");
   }
 
   function deleteComment(commentToDelete) {
@@ -71,7 +76,9 @@ export function Post({ author, publishedAt, content }) {
             } else if (line.type === "link") {
               return (
                 <p key={line.content}>
-                  <a href="#">{line.content}</a>
+                  <a href={line.content} target="_blank">
+                    {line.content}
+                  </a>
                 </p>
               );
             }
@@ -83,9 +90,11 @@ export function Post({ author, publishedAt, content }) {
           <strong> Deixe seu comentário </strong>
           <textarea
             name="comment"
-            placeholder="Deixe um comentário"
+            placeholder="Digite aqui..."
             value={newCommentText}
             onChange={handleNewCommentChange}
+            onInvalid={handleNewCommentInvalid}
+            required
           ></textarea>
 
           <footer>

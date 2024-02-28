@@ -31,7 +31,7 @@ const posts = [
       {
         type: "paragraph",
         content: `Quem mais aqui adora começar algo novo? 🙋‍♂️🙋‍♀️ Compartilhe nos
-        // comentários o que te motiva a iniciar um novo projeto! 💬`,
+        comentários o que te motiva a iniciar um novo projeto! 💬`,
       },
     ],
     publishedAt: new Date("2024-02-25 16:36:30"),
@@ -126,8 +126,6 @@ export function App() {
               />
             );
           })}
-          {/* <Post author="flavioxe" content="Lorem impsun" />
-          <Post author="autor 2" content="Lorem impsun bla bla pipipopo" /> */}
         </main>
       </div>
     </>
