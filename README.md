@@ -1,17 +1,17 @@
 # Social Feed Simulator
 
-Este é um projeto de estudo que consiste em uma landing page que simula um feed de rede social, desenvolvida com Vite e React. Os usuários podem ler posts, fazer comentários, excluir comentários e aplaudir comentários várias vezes.
+This is a study project consisting of a landing page that simulates a social media feed, developed using Vite and React. Users can read posts, leave comments, delete comments, and applaud comments multiple times.
 
 ## About
-Este projeto foi criado como parte de um estudo de Vite e React para simular um feed de rede social interativo.
+This project was created as part of a study on Vite and React to simulate an interactive social media feed.
 
-## Funcionalidades
-- Visualizar posts no feed.
-- Fazer comentários em posts.
-- Excluir comentários.
-- Aplaudir comentários.
+## Features
+- View posts on the feed.
+- Leave comments on posts.
+- Delete comments.
+- Applaud comments.
 
-## Tecnologias Utilizadas
+## Technologies Used
 - Vite
 - React
 - HTML
